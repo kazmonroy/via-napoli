@@ -1,5 +1,8 @@
-// Test ID: IIDSAT
+import styles from './order.module.css';
 
+export async function loader() {}
+
+// Test ID: IIDSAT
 import {
   calcMinutesLeft,
   formatCurrency,
@@ -55,17 +58,17 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div>
-      <div>
-        <h2>Status</h2>
+    <section>
+      <div className={styles.status}>
+        <h2>Order XXXX status</h2>
 
         <div>
-          {priority && <span>Priority</span>}
-          <span>{status} order</span>
+          {priority && <span className={styles.priority}>Priority</span>}
+          <span className={styles['on-going']}>{status}order</span>
         </div>
       </div>
 
-      <div>
+      <div className={styles.delivery}>
         <p>
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
@@ -73,13 +76,16 @@ function Order() {
         </p>
         <p>(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
-
       <div>
+        <p>order info goes here</p>
+      </div>
+
+      <div className={styles.summary}>
         <p>Price pizza: {formatCurrency(orderPrice)}</p>
         {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
         <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
-    </div>
+    </section>
   );
 }
 
