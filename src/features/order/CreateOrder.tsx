@@ -1,12 +1,13 @@
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import styles from './order.module.css';
 import { createOrder } from '../../services/apiRestaurant';
+import { OrderFrom } from '../../services/api.interfaces';
 
 // https://uibakery.io/regex-library/phone-number
-// const isValidPhone = (str: string) =>
-//   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-//     str
-//   );
+const isValidPhone = (str: string) =>
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str
+  );
 
 const fakeCart = [
   {
@@ -32,24 +33,40 @@ const fakeCart = [
   },
 ];
 
+interface Errors {
+  [k: string]: string;
+}
+
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  const order = {
+  const order: OrderFrom = {
     ...data,
     cart: JSON.parse(data.cart),
     priority: data.priority === 'on',
   };
 
-  console.log(order);
+  const errors: Errors = {};
 
+  if (!isValidPhone(order.phone!))
+    errors.phone =
+      'Please provide a phone number. We might need it to contact you.';
+
+  if (Object.keys(errors).length > 0) return errors;
+
+  // If everything is okay, new order will be created and user redirected
   const newOrder = await createOrder(order);
   return redirect(`/order/${newOrder.id}`);
 }
 
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+  const formErrors = useActionData() as Errors;
+
+  console.log(formErrors);
   const cart = fakeCart;
 
   return (
@@ -60,17 +77,24 @@ function CreateOrder() {
         <div className={styles.inputs}>
           <div>
             <label>First Name</label>
-            <input type='text' name='customer' required />
+            <div>
+              <input type='text' name='customer' required />
+            </div>
           </div>
 
           <div>
             <label>Phone number</label>
-            <input type='tel' name='phone' required />
+            <div>
+              <input type='tel' name='phone' required />
+              {formErrors && <span>{formErrors.phone}</span>}
+            </div>
           </div>
 
           <div>
             <label>Address</label>
-            <input type='text' name='address' required />
+            <div>
+              <input type='text' name='address' required />
+            </div>
           </div>
         </div>
 
@@ -87,7 +111,9 @@ function CreateOrder() {
 
         <div>
           <input type='hidden' name='cart' value={JSON.stringify(cart)} />
-          <button>Order now</button>
+          <button disabled={isSubmitting}>
+            {isSubmitting ? 'Placing order...' : 'Order now'}{' '}
+          </button>
         </div>
       </Form>
     </div>
