@@ -1,5 +1,5 @@
-import { useState } from 'react';
-
+import { Form } from 'react-router-dom';
+import styles from './order.module.css';
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
@@ -30,6 +30,14 @@ const fakeCart = [
   },
 ];
 
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+
+  return null;
+}
+
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
@@ -38,22 +46,20 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <form>
-        <div>
-          <label>First Name</label>
-          <input type='text' name='customer' required />
-        </div>
-
-        <div>
-          <label>Phone number</label>
+      <Form method='POST' className={styles.form}>
+        <div className={styles.inputs}>
           <div>
+            <label>First Name</label>
+            <input type='text' name='customer' required />
+          </div>
+
+          <div>
+            <label>Phone number</label>
             <input type='tel' name='phone' required />
           </div>
-        </div>
 
-        <div>
-          <label>Address</label>
           <div>
+            <label>Address</label>
             <input type='text' name='address' required />
           </div>
         </div>
@@ -70,9 +76,10 @@ function CreateOrder() {
         </div>
 
         <div>
+          <input type='hidden' value={JSON.stringify(cart)} />
           <button>Order now</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
