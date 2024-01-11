@@ -14,7 +14,7 @@ function AppLayout() {
       {isLoading && <Loader />}
       <Header />
 
-      <main>
+      <main className={isLoading ? styles.blur : ''}>
         <Outlet />
       </main>
 

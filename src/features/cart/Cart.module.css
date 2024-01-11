@@ -10,3 +10,32 @@
     }
   }
 }
+
+.item {
+  display: flex;
+  list-style: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-light--3);
+  align-items: center;
+
+  p {
+    flex: 1;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.cart {
+  h2 {
+    margin: 2rem 0 1rem 0;
+  }
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 0;
+  }
+}

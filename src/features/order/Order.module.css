@@ -8,12 +8,12 @@
   }
 }
 
-section {
+.order {
   > div:nth-child(even) {
     background-color: var(--color-light--3);
     padding: 1rem 1.5rem;
   }
-  padding: 2rem 0.5rem;
+
   .status {
     display: flex;
     align-items: center;

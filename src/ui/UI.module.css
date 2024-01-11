@@ -14,13 +14,16 @@
 .layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 32px;
   height: 100dvh;
 }
 
 .home {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 2rem 0.5rem;
+
   h1,
   h2 {
     text-align: center;
@@ -29,5 +32,49 @@
 
   h2 {
     color: var(--primary-light--3);
+  }
+}
+
+.blur {
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -ms-filter: blur(8px);
+  -o-filter: blur(8px);
+  filter: blur(8px);
+}
+
+/* Buttons & Link styling */
+.btn {
+  background-color: var(--primary);
+  border: none;
+  letter-spacing: 1px;
+  font-weight: 600;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  border-radius: 2rem;
+  text-transform: uppercase;
+  color: inherit;
+
+  &:hover {
+    background-color: var(--primary-light--2);
+  }
+}
+
+.sm {
+  padding: 0.7rem 1rem;
+  font-size: 0.7rem;
+}
+
+.md {
+  padding: 1rem 2rem;
+  font-size: 0.8rem;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-light--3);
+
+  &:hover {
+    background-color: var(--color-light--3);
   }
 }

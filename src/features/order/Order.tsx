@@ -40,7 +40,7 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <section>
+    <section className={styles.order}>
       <div className={styles.status}>
         <h2>Order XXXX status</h2>
 

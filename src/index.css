@@ -34,6 +34,10 @@ body {
   background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
   background-size: 20% 50%;
   animation: loading 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes loading {
@@ -67,7 +71,9 @@ main {
   overflow: scroll;
   margin-inline: auto;
   width: min(100%, 800px);
+  padding: 1rem;
 }
+
 h2 {
   font-size: clamp(1rem, 1.8vw, 2rem);
 }
@@ -77,6 +83,8 @@ input {
   border-radius: 2rem;
   border: none;
   outline-color: var(--primary);
+  border: 1px solid var(--color-light--3);
+  width: min(100%, 400px);
 }
 
 input[type='checkbox'] {
@@ -84,20 +92,4 @@ input[type='checkbox'] {
   height: 24px;
   width: 24px;
   accent-color: var(--primary);
-}
-
-button {
-  background-color: var(--primary);
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-  text-transform: uppercase;
-  color: inherit;
-  font-weight: 600;
-  transition: all 0.2s ease-in;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--primary-light--2);
-  }
 }

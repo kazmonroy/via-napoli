@@ -2,6 +2,8 @@ import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import styles from './order.module.css';
 import { createOrder } from '../../services/apiRestaurant';
 import { OrderFrom } from '../../services/api.interfaces';
+import Button from '../../ui/Button';
+import { useAppSelector } from '../../hooks';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
@@ -62,11 +64,11 @@ export async function action({ request }: { request: Request }) {
 
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
+  const username = useAppSelector((state) => state.user.username);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const formErrors = useActionData() as Errors;
 
-  console.log(formErrors);
   const cart = fakeCart;
 
   return (
@@ -78,7 +80,12 @@ function CreateOrder() {
           <div>
             <label>First Name</label>
             <div>
-              <input type='text' name='customer' required />
+              <input
+                type='text'
+                name='customer'
+                defaultValue={username}
+                required
+              />
             </div>
           </div>
 
@@ -111,9 +118,10 @@ function CreateOrder() {
 
         <div>
           <input type='hidden' name='cart' value={JSON.stringify(cart)} />
-          <button disabled={isSubmitting}>
+
+          <Button disabled={isSubmitting} size='md'>
             {isSubmitting ? 'Placing order...' : 'Order now'}{' '}
-          </button>
+          </Button>
         </div>
       </Form>
     </div>

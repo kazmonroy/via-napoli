@@ -1,0 +1,31 @@
+.menu {
+  li {
+    display: flex;
+    padding: 1rem 0;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-light--1);
+
+    img {
+      width: 100px;
+    }
+
+    > div {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+
+      p:nth-child(2) {
+        color: var(--color-light--2);
+        flex: 1;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        p {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
