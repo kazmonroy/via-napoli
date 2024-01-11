@@ -11,11 +11,6 @@ interface Props {
 }
 
 function Button({ children, onClick, size, disabled, to, style }: Props) {
-  // const handleClick = () => {
-  //   if (!onClick) return;
-  //   onClick!();
-  // };
-
   if (to)
     return (
       <Link
@@ -30,7 +25,9 @@ function Button({ children, onClick, size, disabled, to, style }: Props) {
   return (
     <button
       disabled={disabled}
-      className={`${styles.btn} ${size ? styles[size] : ''}`}
+      className={`${styles.btn} ${size ? styles[size] : ''} ${
+        style ? styles[style] : ''
+      }`}
       onClick={onClick}
     >
       {children}

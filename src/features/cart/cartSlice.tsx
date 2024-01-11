@@ -6,6 +6,7 @@ interface Cart {
 }
 
 const initialState: Cart = {
+  // cart: [],
   cart: [
     {
       pizzaId: 12,
@@ -54,9 +55,11 @@ const cartSlice = createSlice({
     decreaseItemQuantity(state, action: PayloadAction<number>) {
       const item = state.cart.find((item) => item.pizzaId === action.payload);
 
-      if (!item) return state;
+      if (!item) return;
+      if (item.quantity === 0) return;
 
       item.quantity--;
+
       item.totalPrice = item.quantity * item.unitPrice;
     },
     clearCart(state) {
