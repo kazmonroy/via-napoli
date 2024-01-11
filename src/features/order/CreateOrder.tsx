@@ -1,10 +1,12 @@
-import { Form } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import styles from './order.module.css';
+import { createOrder } from '../../services/apiRestaurant';
+
 // https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
-  );
+// const isValidPhone = (str: string) =>
+//   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+//     str
+//   );
 
 const fakeCart = [
   {
@@ -30,12 +32,20 @@ const fakeCart = [
   },
 ];
 
-export async function action({ request }) {
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
-  return null;
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart),
+    priority: data.priority === 'on',
+  };
+
+  console.log(order);
+
+  const newOrder = await createOrder(order);
+  return redirect(`/order/${newOrder.id}`);
 }
 
 function CreateOrder() {
@@ -76,7 +86,7 @@ function CreateOrder() {
         </div>
 
         <div>
-          <input type='hidden' value={JSON.stringify(cart)} />
+          <input type='hidden' name='cart' value={JSON.stringify(cart)} />
           <button>Order now</button>
         </div>
       </Form>

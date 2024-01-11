@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import SearchOrder from '../features/order/SearchOrder';
+import styles from './UI.module.css';
 
 function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <Link to='/' className='logo'>
         Via Napoli
       </Link>

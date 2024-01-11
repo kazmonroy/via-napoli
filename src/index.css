@@ -4,6 +4,7 @@
   --primary: #facc14;
   --primary-light: #fef9c3;
   --primary-light--2: #fde048;
+  --primary-light--3: #eab30a;
 
   --color-dark--1: #44403c;
   --color-dark--2: #2a2524;
@@ -23,13 +24,6 @@ body {
     sans-serif;
   background-color: #f7f7f7;
   color: var(--color-dark--1);
-}
-
-.layout {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 32px;
-  height: 100dvh;
 }
 
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
@@ -69,19 +63,6 @@ input {
   }
 }
 
-header {
-  background-color: var(--primary);
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8rem 1.5rem;
-  align-items: center;
-
-  .logo {
-    color: inherit;
-    letter-spacing: 2px;
-  }
-}
-
 main {
   overflow: scroll;
   margin-inline: auto;
@@ -96,19 +77,6 @@ input {
   border-radius: 2rem;
   border: none;
   outline-color: var(--primary);
-}
-
-.cart-overview {
-  background-color: var(--color-dark--2);
-  display: flex;
-  justify-content: space-between;
-  padding: 1.2rem;
-  color: var(--color-light--1);
-  p {
-    span:first-child {
-      margin-right: 1rem;
-    }
-  }
 }
 
 input[type='checkbox'] {

@@ -1,23 +1,8 @@
+import { OrderFrom, OrderInterface, PizzaMenu } from './api.interfaces';
+
 const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 
-interface Order {
-  pizzaId: number;
-  name: string;
-  quantity: number;
-  unitPrice: number;
-  totalPrice: number;
-}
-
-export interface Pizza {
-  id: number;
-  name: string;
-  unitPrice: number;
-  imageUrl: string;
-  ingredients: string[];
-  soldOut: boolean;
-}
-
-export async function getMenu(): Promise<Pizza[]> {
+export async function getMenu(): Promise<PizzaMenu> {
   const res = await fetch(`${API_URL}/menu`);
 
   // fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
@@ -35,7 +20,7 @@ export async function getOrder(id: string) {
   return data;
 }
 
-export async function createOrder(newOrder: Order) {
+export async function createOrder(newOrder: OrderFrom) {
   try {
     const res = await fetch(`${API_URL}/order`, {
       method: 'POST',
@@ -53,7 +38,7 @@ export async function createOrder(newOrder: Order) {
   }
 }
 
-export async function updateOrder(id: string, updateObj: Order) {
+export async function updateOrder(id: string, updateObj: OrderInterface) {
   try {
     const res = await fetch(`${API_URL}/order/${id}`, {
       method: 'PATCH',

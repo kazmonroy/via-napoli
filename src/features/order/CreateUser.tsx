@@ -3,7 +3,7 @@ import { useState } from 'react';
 function CreateUser() {
   const [username, setUsername] = useState('');
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
@@ -12,8 +12,8 @@ function CreateUser() {
       <p>👋 Welcome! Please start by telling us your name:</p>
 
       <input
-        type="text"
-        placeholder="Your full name"
+        type='text'
+        placeholder='Your full name'
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />

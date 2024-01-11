@@ -3,7 +3,7 @@ import {
   formatCurrency,
   formatDate,
 } from '../../utils/helpers';
-import { getOrder } from '../../services/apiRestaurant';
+import { OrderInterface } from '../../services/api.interfaces';
 import styles from './order.module.css';
 import {
   ActionFunctionArgs,
@@ -11,7 +11,7 @@ import {
   Params,
   useLoaderData,
 } from 'react-router-dom';
-import { OrderInterface } from './Order.models';
+import { getOrder } from '../../services/apiRestaurant';
 
 const PathNames = {
   order: '/order/:orderId',
@@ -24,15 +24,16 @@ interface Args extends ActionFunctionArgs {
 export async function loader({ params }: Args): Promise<{
   order: OrderInterface;
 }> {
-  console.log(params.orderId);
   const order = await getOrder(params.orderId!);
   return { order };
 }
 
 // Test ID: IIDSAT
-
+interface Props {
+  order: OrderInterface;
+}
 function Order() {
-  const { order } = useLoaderData() as OrderInterface;
+  const { order } = useLoaderData() as Props;
 
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const { priority, priorityPrice, orderPrice, estimatedDelivery } = order;
