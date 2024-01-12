@@ -4,36 +4,17 @@ import { createOrder } from '../../services/apiRestaurant';
 import { OrderFrom } from '../../services/api.interfaces';
 import Button from '../../ui/Button';
 import { useAppSelector } from '../../hooks';
+import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
+import EmptyCart from '../cart/EmptyCart';
+import store from '../../store';
+import { formatCurrency } from '../../utils/helpers';
+import { useState } from 'react';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
   );
-
-const fakeCart = [
-  {
-    pizzaId: 12,
-    name: 'Mediterranean',
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: 'Vegetale',
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: 'Spinach and Mushroom',
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
 
 interface Errors {
   [k: string]: string;
@@ -46,7 +27,7 @@ export async function action({ request }: { request: Request }) {
   const order: OrderFrom = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === 'on',
+    priority: data.priority === 'true',
   };
 
   const errors: Errors = {};
@@ -59,17 +40,25 @@ export async function action({ request }: { request: Request }) {
 
   // If everything is okay, new order will be created and user redirected
   const newOrder = await createOrder(order);
+  store.dispatch(clearCart());
   return redirect(`/order/${newOrder.id}`);
 }
 
 function CreateOrder() {
-  // const [withPriority, setWithPriority] = useState(false);
+  const [withPriority, setWithPriority] = useState(false);
   const username = useAppSelector((state) => state.user.username);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const formErrors = useActionData() as Errors;
 
-  const cart = fakeCart;
+  const totalCartPrice = useAppSelector(getTotalCartPrice);
+  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
+
+  const totalPrice = totalCartPrice + priorityPrice;
+
+  const cart = useAppSelector(getCart);
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className={styles['order-wrapper']}>
@@ -110,17 +99,22 @@ function CreateOrder() {
             type='checkbox'
             name='priority'
             id='priority'
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+            value={withPriority}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor='priority'>Want to yo give your order priority?</label>
+          <label htmlFor='priority'>
+            Want to yo give your order priority?{' '}
+            <span>(+ {formatCurrency(priorityPrice)})</span>{' '}
+          </label>
         </div>
 
         <div>
           <input type='hidden' name='cart' value={JSON.stringify(cart)} />
 
           <Button disabled={isSubmitting} size='md'>
-            {isSubmitting ? 'Placing order...' : 'Order now'}{' '}
+            {isSubmitting
+              ? 'Placing order...'
+              : `Order now from  ${formatCurrency(totalPrice)}`}{' '}
           </Button>
         </div>
       </Form>

@@ -10,8 +10,10 @@ import {
   ParamParseKey,
   Params,
   useLoaderData,
+  useParams,
 } from 'react-router-dom';
 import { getOrder } from '../../services/apiRestaurant';
+import OrderItem from './OrderItem';
 
 const PathNames = {
   order: '/order/:orderId',
@@ -35,18 +37,30 @@ interface Props {
 function Order() {
   const { order } = useLoaderData() as Props;
 
+  const { orderId } = useParams();
+
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
-  const { priority, priorityPrice, orderPrice, estimatedDelivery } = order;
+  const {
+    priority,
+    priorityPrice,
+    orderPrice,
+    estimatedDelivery,
+    cart,
+    status,
+  } = order;
+
+  console.log('order', order);
+
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
     <section className={styles.order}>
       <div className={styles.status}>
-        <h2>Order XXXX status</h2>
+        <h2>Order #{orderId} status</h2>
 
         <div>
           {priority && <span className={styles.priority}>Priority</span>}
-          <span className={styles['on-going']}>{status}order</span>
+          <span className={styles['on-going']}>{status} order</span>
         </div>
       </div>
 
@@ -58,9 +72,11 @@ function Order() {
         </p>
         <p>(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
-      <div>
-        <p>order info goes here</p>
-      </div>
+      <ul>
+        {cart.map((item) => (
+          <OrderItem item={item} key={item.pizzaId} />
+        ))}
+      </ul>
 
       <div className={styles.summary}>
         <p>Price pizza: {formatCurrency(orderPrice)}</p>

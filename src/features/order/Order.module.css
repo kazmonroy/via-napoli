@@ -13,6 +13,8 @@
   margin-inline: auto;
 }
 .order {
+  width: min(100%, 800px);
+  margin-inline: auto;
   > div:nth-child(even) {
     background-color: var(--color-light--3);
     padding: 1rem 1.5rem;
@@ -21,19 +23,22 @@
   .status {
     display: flex;
     align-items: center;
-    padding: 1rem 0;
+    padding: 2rem 0;
 
     h2 {
       flex: 1;
     }
 
     div {
+      display: flex;
+
       span {
         text-transform: uppercase;
         color: white;
         border-radius: 2rem;
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
+        font-weight: 600;
       }
 
       .priority {
@@ -65,20 +70,35 @@
       }
     }
   }
+  ul {
+    padding: 2rem 0;
 
-  div:last-child {
+    .item {
+      list-style: none;
+      padding: 1rem 1.5rem;
+
+      div {
+        display: flex;
+        > p:first-child {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .summary {
     p {
       font-size: 0.8rem;
-      font-weight: 500;
     }
-    p:first-of-type {
+    > p:first-child,
+    p:nth-child(2) {
+      font-size: 0.9rem;
       padding-bottom: 1rem;
     }
 
-    p:last-child {
-      font-weight: 600;
-      padding-top: 1rem;
-      font-size: unset;
+    > p:last-child {
+      font-size: 1rem;
+      font-weight: 700;
     }
   }
 }

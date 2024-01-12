@@ -1,10 +1,15 @@
+import { PizzaOrder } from '../../services/api.interfaces';
 import { formatCurrency } from '../../utils/helpers';
+import styles from './Order.module.css';
+interface Props {
+  item: PizzaOrder;
+}
 
-function OrderItem({ item, isLoadingIngredients, ingredients }) {
+function OrderItem({ item }: Props) {
   const { quantity, name, totalPrice } = item;
 
   return (
-    <li>
+    <li className={styles.item}>
       <div>
         <p>
           <span>{quantity}&times;</span> {name}

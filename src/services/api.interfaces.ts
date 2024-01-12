@@ -9,6 +9,7 @@ export interface OrderInterface {
   position: string;
   orderPrice: number;
   priorityPrice: number;
+  status: string;
   cart: PizzaOrder[];
 }
 
