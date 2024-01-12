@@ -40,16 +40,9 @@ function Order() {
   const { orderId } = useParams();
 
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
-  const {
-    priority,
-    priorityPrice,
-    orderPrice,
-    estimatedDelivery,
-    cart,
-    status,
-  } = order;
+  const { priority, orderPrice, estimatedDelivery, cart, status } = order;
 
-  console.log('order', order);
+  const priorityPrice = priority ? orderPrice * 0.2 : 0;
 
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
