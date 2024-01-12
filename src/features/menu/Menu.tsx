@@ -14,7 +14,7 @@ function Menu() {
   const menu = useLoaderData() as PizzaItem[];
 
   return (
-    <div>
+    <div className={styles['menu-wrapper']}>
       <h1>Menu</h1>
       <ul className={styles.menu}>
         {menu.map((pizza) => (

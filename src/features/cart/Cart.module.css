@@ -30,6 +30,8 @@
 }
 
 .cart {
+  margin-inline: auto;
+  width: min(100%, 800px);
   h2 {
     margin: 2rem 0 1rem 0;
   }
@@ -38,4 +40,14 @@
     gap: 1rem;
     padding: 2rem 0;
   }
+}
+
+.empty-cart {
+  padding: 1rem 0;
+  font-weight: 500;
+}
+
+.cart-quantity {
+  display: flex;
+  gap: 0.5rem;
 }

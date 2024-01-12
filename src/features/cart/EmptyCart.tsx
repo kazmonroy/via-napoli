@@ -1,10 +1,7 @@
-import { Link } from 'react-router-dom';
-
+import styles from './Cart.module.css';
 function EmptyCart() {
   return (
-    <div>
-      <Link to="/menu">&larr; Back to menu</Link>
-
+    <div className={styles['empty-cart']}>
       <p>Your cart is still empty. Start adding some pizzas :)</p>
     </div>
   );

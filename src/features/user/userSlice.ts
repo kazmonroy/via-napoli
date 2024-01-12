@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 
 interface User {
   username: string;
@@ -39,6 +40,8 @@ const userSlice = createSlice({
 //   // 3) Then we return an object with the data that we are interested in
 //   return { position, address };
 // }
+
+export const getUsername = (state: RootState) => state.user.username;
 
 export const { updateName } = userSlice.actions;
 

@@ -3,11 +3,13 @@ import CartItem from './CartItem';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Button from '../../ui/Button';
 import styles from './Cart.module.css';
-import { clearCart } from './cartSlice';
+import { clearCart, getCart } from './cartSlice';
+import EmptyCart from './EmptyCart';
+import { getUsername } from '../user/userSlice';
 
 function Cart() {
-  const cart = useAppSelector((state) => state.cart.cart);
-  const username = useAppSelector((state) => state.user.username);
+  const cart = useAppSelector(getCart);
+  const username = useAppSelector(getUsername);
   const dispatch = useAppDispatch();
 
   const handleClearCart = () => {
@@ -36,7 +38,7 @@ function Cart() {
           </div>
         </>
       ) : (
-        <p>Cart is empty, start adding pizzas!</p>
+        <EmptyCart />
       )}
     </section>
   );

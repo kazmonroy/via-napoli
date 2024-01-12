@@ -8,6 +8,10 @@
   }
 }
 
+.order-wrapper {
+  width: min(100%, 800px);
+  margin-inline: auto;
+}
 .order {
   > div:nth-child(even) {
     background-color: var(--color-light--3);

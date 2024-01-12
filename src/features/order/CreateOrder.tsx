@@ -72,7 +72,7 @@ function CreateOrder() {
   const cart = fakeCart;
 
   return (
-    <div>
+    <div className={styles['order-wrapper']}>
       <h2>Ready to order? Let's go!</h2>
 
       <Form method='POST' className={styles.form}>
