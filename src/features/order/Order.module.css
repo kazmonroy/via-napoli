@@ -77,6 +77,13 @@
       list-style: none;
       padding: 1rem 1.5rem;
 
+      > p {
+        color: var(--color-light--2);
+        text-transform: capitalize;
+        font-style: italic;
+        padding-top: 0.25rem;
+      }
+
       div {
         display: flex;
         > p:first-child {

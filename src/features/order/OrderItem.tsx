@@ -3,9 +3,11 @@ import { formatCurrency } from '../../utils/helpers';
 import styles from './Order.module.css';
 interface Props {
   item: PizzaOrder;
+  ingredients: string[];
+  isLoadingIngredients: boolean;
 }
 
-function OrderItem({ item }: Props) {
+function OrderItem({ item, ingredients, isLoadingIngredients }: Props) {
   const { quantity, name, totalPrice } = item;
 
   return (
@@ -16,6 +18,7 @@ function OrderItem({ item }: Props) {
         </p>
         <p>{formatCurrency(totalPrice)}</p>
       </div>
+      {<p>{isLoadingIngredients ? 'loading...' : ingredients?.join(', ')}</p>}
     </li>
   );
 }
