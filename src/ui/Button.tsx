@@ -22,6 +22,7 @@ function Button({ children, onClick, size, disabled, to, style }: Props) {
         {children}
       </Link>
     );
+
   return (
     <button
       disabled={disabled}

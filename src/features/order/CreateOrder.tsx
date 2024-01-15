@@ -3,12 +3,13 @@ import styles from './order.module.css';
 import { createOrder } from '../../services/apiRestaurant';
 import { OrderFrom } from '../../services/api.interfaces';
 import Button from '../../ui/Button';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import EmptyCart from '../cart/EmptyCart';
 import store from '../../store';
 import { formatCurrency } from '../../utils/helpers';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { fetchAddress } from '../user/userSlice';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
@@ -46,17 +47,29 @@ export async function action({ request }: { request: Request }) {
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
-  const username = useAppSelector((state) => state.user.username);
+
+  const {
+    username,
+    address,
+    status: addressStatus,
+    error: addressError,
+    position,
+  } = useAppSelector((state) => state.user);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const formErrors = useActionData() as Errors;
 
   const totalCartPrice = useAppSelector(getTotalCartPrice);
   const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
-
   const totalPrice = totalCartPrice + priorityPrice;
 
   const cart = useAppSelector(getCart);
+
+  console.log('position', position, address);
+
+  const isLoading = addressStatus === 'loading';
+
+  const dispatch = useAppDispatch();
 
   if (!cart.length) return <EmptyCart />;
 
@@ -88,8 +101,26 @@ function CreateOrder() {
 
           <div>
             <label>Address</label>
-            <div>
-              <input type='text' name='address' required />
+            <div className='address'>
+              <input
+                type='text'
+                name='address'
+                defaultValue={address ? address : ''}
+                required
+                disabled={isLoading}
+                placeholder={isLoading ? 'Getting address' : ''}
+              />
+              {addressStatus === 'error' && <span>{addressError}</span>}
+
+              <Button
+                size='sm'
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(fetchAddress());
+                }}
+              >
+                Get address
+              </Button>
             </div>
           </div>
         </div>

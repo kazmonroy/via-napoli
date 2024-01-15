@@ -118,6 +118,7 @@
       align-items: center;
 
       div {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -128,6 +129,13 @@
           display: inline-block;
           padding-left: 1rem;
         }
+      }
+
+      button {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        z-index: 3;
       }
 
       input {
