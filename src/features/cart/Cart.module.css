@@ -45,11 +45,9 @@
 .empty-cart {
   width: min(100%, 800px);
   margin-inline: auto;
-  padding: 1rem 0;
-  font-weight: 500;
 
   p {
-    padding-top: 1rem;
+    padding-top: 2rem;
   }
 }
 

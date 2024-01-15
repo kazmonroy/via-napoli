@@ -3,7 +3,7 @@ import styles from './UI.module.css';
 
 interface Props {
   children: string | string[] | JSX.Element | JSX.Element[];
-  onClick?: () => void;
+  onClick?: (e?: unknown) => void;
   size: string;
   disabled?: boolean;
   to?: string;

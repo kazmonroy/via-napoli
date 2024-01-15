@@ -18,10 +18,9 @@ function Cart() {
 
   return (
     <section className={styles.cart}>
-      <Link to='/menu'>&larr; Back to menu</Link>
-
       {cart.length > 0 ? (
         <>
+          <Link to='/menu'>&larr; Back to menu</Link>
           <h2>Your cart, {username}</h2>
 
           {cart.map((item) => (

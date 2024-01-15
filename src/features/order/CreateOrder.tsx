@@ -41,6 +41,7 @@ export async function action({ request }: { request: Request }) {
 
   // If everything is okay, new order will be created and user redirected
   const newOrder = await createOrder(order);
+
   store.dispatch(clearCart());
   return redirect(`/order/${newOrder.id}`);
 }
@@ -64,8 +65,6 @@ function CreateOrder() {
   const totalPrice = totalCartPrice + priorityPrice;
 
   const cart = useAppSelector(getCart);
-
-  console.log('position', position, address);
 
   const isLoading = addressStatus === 'loading';
 
@@ -141,6 +140,15 @@ function CreateOrder() {
 
         <div>
           <input type='hidden' name='cart' value={JSON.stringify(cart)} />
+          <input
+            type='hidden'
+            name='position'
+            value={
+              position?.latitude && position.longitude
+                ? `${position.latitude} ${position.longitude}`
+                : ''
+            }
+          />
 
           <Button disabled={isSubmitting} size='md'>
             {isSubmitting
