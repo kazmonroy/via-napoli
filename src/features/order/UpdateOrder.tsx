@@ -1,15 +1,28 @@
-import { useFetcher } from 'react-router-dom';
+import {
+  useFetcher,
+  ActionFunctionArgs,
+  Params,
+  ParamParseKey,
+} from 'react-router-dom';
 import Button from '../../ui/Button';
 import { updateOrder } from '../../services/apiRestaurant';
 
-interface ActionProps {
-  request: Request;
-  params: { orderId: string };
+// interface MyParams {
+//   orderId: string;
+// }
+
+const MyParams = {
+  orderId: '/order/:orderId',
+} as const;
+
+interface Args extends ActionFunctionArgs {
+  params: Params<ParamParseKey<typeof MyParams.orderId>>;
 }
 
-export async function action({ params }: ActionProps) {
+export async function action({ params }: Args) {
   const data = { priority: true };
-  await updateOrder(params.orderId, data);
+
+  await updateOrder(params.orderId!, data);
 
   return null;
 }
