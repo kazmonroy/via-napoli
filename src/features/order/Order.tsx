@@ -16,6 +16,7 @@ import {
 import { getOrder } from '../../services/apiRestaurant';
 import OrderItem from './OrderItem';
 import { useEffect } from 'react';
+import UpdateOrder from './UpdateOrder';
 
 const PathNames = {
   order: '/order/:orderId',
@@ -52,8 +53,6 @@ function Order() {
       fetcher.load('/menu');
     }
   }, [fetcher]);
-
-  console.log(fetcher);
 
   return (
     <section className={styles.order}>
@@ -93,6 +92,7 @@ function Order() {
         {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
         <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
+      {!priority && <UpdateOrder />}
     </section>
   );
 }
