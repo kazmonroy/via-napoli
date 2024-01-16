@@ -1,4 +1,4 @@
-import { OrderFrom, OrderInterface, PizzaMenu } from './api.interfaces';
+import { OrderFrom, PizzaMenu } from './api.interfaces';
 
 const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 
