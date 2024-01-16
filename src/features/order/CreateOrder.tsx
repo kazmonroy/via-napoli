@@ -8,7 +8,7 @@ import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import EmptyCart from '../cart/EmptyCart';
 import store from '../../store';
 import { formatCurrency } from '../../utils/helpers';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { fetchAddress } from '../user/userSlice';
 
 // https://uibakery.io/regex-library/phone-number
