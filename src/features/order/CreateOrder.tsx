@@ -114,7 +114,7 @@ function CreateOrder() {
               <Button
                 size='sm'
                 onClick={(e) => {
-                  e.preventDefault();
+                  e!.preventDefault();
                   dispatch(fetchAddress());
                 }}
               >

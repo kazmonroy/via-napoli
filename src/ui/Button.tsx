@@ -3,7 +3,7 @@ import styles from './UI.module.css';
 
 interface Props {
   children: string | string[] | JSX.Element | JSX.Element[];
-  onClick?: (e?: unknown) => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   size: string;
   disabled?: boolean;
   to?: string;
