@@ -27,7 +27,7 @@ export async function action({ request }: { request: Request }) {
 
   const order: OrderFrom = {
     ...data,
-    cart: JSON.parse(data.cart),
+    cart: JSON.parse(String(data.cart)),
     priority: data.priority === 'true',
   };
 
