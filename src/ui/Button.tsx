@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './ui.module.css';
+import styles from './shared.module.css';
 
 interface Props {
   children: string | string[] | JSX.Element | JSX.Element[];
