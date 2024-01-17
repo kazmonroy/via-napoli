@@ -47,7 +47,7 @@ export async function action({ request }: { request: Request }) {
 }
 
 function CreateOrder() {
-  const [withPriority, setWithPriority] = useState(false);
+  const [withPriority, setWithPriority] = useState('');
 
   const {
     username,
@@ -130,7 +130,7 @@ function CreateOrder() {
             name='priority'
             id='priority'
             value={withPriority}
-            onChange={(e) => setWithPriority(e.target.checked)}
+            onChange={(e) => setWithPriority(String(e.target.checked))}
           />
           <label htmlFor='priority'>
             Want to yo give your order priority?{' '}
