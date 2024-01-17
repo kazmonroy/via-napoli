@@ -19,7 +19,7 @@ Via Napoli is one of my favorite local pizzerias where I live so I decided to ma
 
 ## Live Preview
 
-[Via Napoli](https://via-napoli.vercel.app/)
+[Via Napoli](https://via-napoli.netlify.app/)
 
 ## Installation
 
@@ -35,7 +35,7 @@ npm run dev
 
 ## Tools
 
-- [Vercel](https://vercel.com/)
+- [Netlify](https://app.netlify.com/)
 - [React](https://react.dev/)
 - [React Router](https://reactrouter.com/)
 - [Redux ToolKit](https://redux-toolkit.js.org/)
