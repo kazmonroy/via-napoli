@@ -19,7 +19,7 @@ Via Napoli is one of my favorite local pizzerias where I live so I decided to ma
 
 ## Live Preview
 
-[Via Napoli](https://via-napoli-se.vercel.app/)
+[Via Napoli](https://via-napoli.vercel.app/)
 
 ## Installation
 
