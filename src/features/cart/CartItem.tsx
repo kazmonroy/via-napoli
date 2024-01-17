@@ -1,6 +1,6 @@
 import { PizzaOrder } from '../../services/api.interfaces';
 import { formatCurrency } from '../../utils/helpers';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 import DeleteItem from './DeleteItem';
 import UpdateCartQuantities from './UpdateCartQuantities';
 

@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../hooks';
 import Button from '../../ui/Button';
 import { decreaseItemQuantity, increaseItemQuantity } from './cartSlice';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 
 interface Props {
   pizzaId: number;

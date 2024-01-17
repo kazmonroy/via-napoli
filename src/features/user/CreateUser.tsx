@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './User.module.css';
+import styles from './user.module.css';
 import { useAppDispatch } from '../../hooks';
 import { updateName } from './userSlice';
 import { useNavigate } from 'react-router-dom';

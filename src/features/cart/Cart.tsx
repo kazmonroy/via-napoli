@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Button from '../../ui/Button';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 import { clearCart, getCart } from './cartSlice';
 import EmptyCart from './EmptyCart';
 import { getUsername } from '../user/userSlice';

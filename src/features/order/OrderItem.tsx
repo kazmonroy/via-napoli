@@ -1,6 +1,6 @@
 import { PizzaOrder } from '../../services/api.interfaces';
 import { formatCurrency } from '../../utils/helpers';
-import styles from './Order.module.css';
+import styles from './order.module.css';
 interface Props {
   item: PizzaOrder;
   ingredients: string[];

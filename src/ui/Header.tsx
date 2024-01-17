@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SearchOrder from '../features/order/SearchOrder';
-import styles from './UI.module.css';
+import styles from './ui.module.css';
 import { useAppSelector } from '../hooks';
 
 function Header() {

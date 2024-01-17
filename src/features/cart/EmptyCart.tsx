@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 function EmptyCart() {
   return (
     <div className={styles['empty-cart']}>

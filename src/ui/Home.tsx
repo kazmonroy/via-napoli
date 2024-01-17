@@ -1,4 +1,4 @@
-import styles from './UI.module.css';
+import styles from './ui.module.css';
 import CreateUser from '../features/user/CreateUser';
 import { useAppSelector } from '../hooks';
 import Button from './Button';

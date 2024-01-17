@@ -1,5 +1,5 @@
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
-import styles from './Order.module.css';
+import styles from './order.module.css';
 import { createOrder } from '../../services/apiRestaurant';
 import { OrderFrom } from '../../services/api.interfaces';
 import Button from '../../ui/Button';
