@@ -4,7 +4,7 @@ import {
   formatDate,
 } from '../../utils/helpers';
 import { OrderInterface, PizzaItem } from '../../services/api.interfaces';
-import styles from './order.module.css';
+import styles from './Order.module.css';
 import {
   ActionFunctionArgs,
   ParamParseKey,
